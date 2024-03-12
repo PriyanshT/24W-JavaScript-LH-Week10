@@ -4,9 +4,21 @@ const output = document.getElementById('output');
 then open this page in a browser and enter 'Coffee' in the console */
 // Coffee object constructor with size, boolean decaf, cream and sugar quantity
 // methods: decaffeinated and description
+function Coffee(size, isDecaf, qtyCream, qtySugar) {
+    this.size = size;
+    this.isDecaf = isDecaf;
+    this.qtyCream = qtyCream;
+    this.qtySugar = qtySugar;
+    this.decaf = (this.isDecaf == true) ? "decaffeinated" : "caffeinated";
+    this.description = function () {
+        return `A ${this.size} ${this.decaf} coffee with ${this.qtyCream} cream 
+        and ${this.qtySugar} sugar.`;
+    }
+}
 
 /* STEP 2: Instatiate a coffee based on the above constructor function */
-
+let priyanshCoffee = new Coffee("medium", false, 2, 1);
+output.textContent = priyanshCoffee.description();
 /* STEP 3: Refresh the page, and in the console, begin to call a method on 
 priyanshCoffee by typing 'priyanshCoffee.' - look at all the members and methods */
 
@@ -26,6 +38,13 @@ Then try Object.Prototype */
 
 /* STEP 6a: Let's circle back to create() - use priyanshCoffee to create a new object 
 instance - one based on priyanshCoffee. */
+let robertCoffee = Object.create(priyanshCoffee);
+robertCoffee.size = "large";
+robertCoffee.isDecaf = true;
+robertCoffee.qtyCream = 1;
+robertCoffee.qtySugar = 1;
+
+output.textContent = robertCoffee.description();
 
 /* STEP 6b: See how this new object inherits from the prototype with robertCoffee.__proto__ in the console. */
 
@@ -35,6 +54,7 @@ Try it out by typing priyanshCoffee.constructor and robertCoffee.constructor */
 
 /* STEP 7b: Since constructor is also a function, you can use it to create 
 a new object instance - try it! */
+let meganCoffee = new robertCoffee.constructor("small", false, 3, 3);
 
 /* STEP 7c: Attempt via the console to access the new object's properties - meganCoffee.size, meganCoffee.isDecaf, etc. */
 
